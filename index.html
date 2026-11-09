@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Education beyond Borders - GO! Atheneum Anderlecht</title>
+<style>
+  :root {
+    --bg: #faf9f7; --ink: #1f1e1d; --hair: rgba(31,30,29,0.12);
+    --title-bg: rgb(238,237,254); --title-line: rgb(83,74,183); --title-ink: rgb(60,52,137); --title-sub: rgb(83,74,183);
+    /* kleuren van de missie/visie-poster van de school */
+    --missie-bg: rgb(228,235,250); --missie-line: rgb(74,105,176); --missie-ink: rgb(38,58,118); --missie-sub: rgb(74,105,176);
+    --lln-bg: rgb(250,246,214); --lln-line: rgb(186,170,40); --lln-ink: rgb(104,90,12); --lln-sub: rgb(140,124,28);
+    --lkr-bg: rgb(250,229,222); --lkr-line: rgb(205,95,65); --lkr-ink: rgb(138,50,30); --lkr-sub: rgb(176,78,52);
+    --sch-bg: rgb(222,240,236); --sch-line: rgb(60,140,130); --sch-ink: rgb(22,88,82); --sch-sub: rgb(44,118,110);
+    --scene-bg: rgb(245,235,244); --scene-line: rgb(140,60,120); --scene-ink: rgb(92,36,80); --scene-sub: rgb(140,60,120);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.4; }
+  .page { max-width: 720px; margin: 0 auto; padding: 8px 18px 44px; position: relative; z-index: 45; }
+  .hint { text-align: center; font-size: 12px; letter-spacing: .05em; color: #9a968f; margin-bottom: 10px; }
+
+  .titlecard { background: var(--title-bg); border: 1px solid var(--title-line); border-radius: 13px; padding: 19px 18px; text-align: center;
+    cursor: pointer; transition: transform .14s ease, box-shadow .18s ease; }
+  .titlecard:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
+  .titlecard.active { box-shadow: 0 0 0 2px var(--title-line) inset; }
+  .titlecard h1 { font-size: 20px; font-weight: 600; color: var(--title-ink); }
+  .titlecard p { font-size: 12.5px; color: var(--title-sub); margin-top: 5px; }
+  .titlecard .tc-cta { font-size: 10.5px; letter-spacing: .03em; color: var(--title-sub); opacity: .8; margin-top: 8px; }
+
+  .section-label { text-align: center; font-size: 14px; font-weight: 600; letter-spacing: .01em; color: #201f1e; margin: 24px 0 13px; }
+  .section-label .sub { display: block; font-size: 11px; font-weight: 400; color: #9a958c; margin-top: 3px; letter-spacing: 0; }
+
+  .grid { display: grid; gap: 13px; }
+  .grid.g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid.g1 { grid-template-columns: 1fr; }
+
+  .block { border-radius: 10px; padding: 17px 14px 18px; cursor: pointer; border: 1px solid; text-align: center;
+    transition: transform .14s ease, box-shadow .18s ease; }
+  .block:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
+  .block.active { box-shadow: 0 0 0 2px currentColor inset; }
+  .block .bt { font-size: 15px; font-weight: 600; margin-bottom: 4px; line-height: 1.25; }
+  .block .bs { font-size: 12px; line-height: 1.35; }
+  .block .bq { font-size: 13px; font-style: italic; line-height: 1.45; }
+
+  .block.missie { background: var(--missie-bg); border-color: var(--missie-line); color: var(--missie-sub); } .block.missie .bt { color: var(--missie-ink); }
+  .block.lln { background: var(--lln-bg); border-color: var(--lln-line); color: var(--lln-sub); } .block.lln .bt { color: var(--lln-ink); }
+  .block.lkr { background: var(--lkr-bg); border-color: var(--lkr-line); color: var(--lkr-sub); } .block.lkr .bt { color: var(--lkr-ink); }
+  .block.sch { background: var(--sch-bg); border-color: var(--sch-line); color: var(--sch-sub); } .block.sch .bt { color: var(--sch-ink); }
+  .block.scene { background: var(--scene-bg); border-color: var(--scene-line); color: var(--scene-sub); } .block.scene .bt { color: var(--scene-ink); }
+
+  .capstone { margin-top: 24px; border: 1px solid var(--missie-line); border-radius: 12px; background: var(--missie-bg);
+    padding: 18px 22px; text-align: center; font-size: 12.5px; line-height: 1.6; color: #3d4452;
+    cursor: pointer; transition: transform .14s ease, box-shadow .18s ease; }
+  .capstone:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
+  .capstone.active { box-shadow: 0 0 0 2px var(--missie-line) inset; }
+  .capstone .cap-cta { font-size: 10.5px; letter-spacing: .03em; color: var(--missie-sub); opacity: .85; margin-top: 9px; }
+
+  .backdrop { position: fixed; inset: 0; background: rgba(20,18,16,0.28); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 40; }
+  .backdrop.open { opacity: 1; pointer-events: auto; }
+  .drawer { position: fixed; top: 0; right: 0; height: 100%; width: 448px; max-width: 90vw; background: #fff;
+    box-shadow: -6px 0 24px rgba(0,0,0,0.12); transform: translateX(100%); transition: transform .34s cubic-bezier(.4,0,.2,1); z-index: 50; }
+  .drawer.open { transform: translateX(0); }
+  .drawer-inner { padding: 40px 30px; overflow-y: auto; height: 100%; position: relative; }
+  .drawer .cat { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; color: #8a857c; margin-bottom: 8px; }
+  .drawer h2 { font-size: 21px; font-weight: 600; margin-bottom: 15px; color: var(--ink); }
+  .drawer p { font-size: 15px; line-height: 1.62; margin-bottom: 12px; color: #33322f; }
+  .drawer .visie { margin: 0 0 12px; padding: 11px 14px; background: #f3f4f7; border-left: 3px solid var(--missie-line); border-radius: 8px; font-size: 14px; line-height: 1.55; color: #3a4050; font-style: italic; }
+  .drawer .visie strong { font-style: normal; color: var(--missie-ink); }
+  .drawer .gap { margin: 10px 0 12px; padding: 10px 14px; border: 1px dashed #c9c3b8; border-radius: 8px; background: #fbfaf7; font-size: 13.5px; line-height: 1.5; color: #8a857c; font-style: italic; }
+  .drawer .vow { font-weight: 600; color: var(--missie-ink); }
+  .drawer-close { position: absolute; top: 14px; right: 14px; width: 32px; height: 32px; border: none; border-radius: 50%; background: #f0efec; color: #666; font-size: 18px; cursor: pointer; }
+  .drawer-close:hover { background: #e5e2dc; }
+
+  @media (max-width: 620px) {
+    .grid.g3 { grid-template-columns: 1fr; }
+    .drawer { width: 100%; max-width: 100%; height: 78%; top: auto; bottom: 0; transform: translateY(100%); border-radius: 16px 16px 0 0; }
+    .drawer.open { transform: translateY(0); }
+    .drawer-inner { padding: 34px 22px; }
+  }
+</style>
+</head>
+<body>
+<!-- Anderlecht: jullie visie als vertrekpunt · de dag als getuigenis (ontvangst, voormiddag, namiddag) · wat ik sterk vond · slot -->
+<div class="page">
+  <div class="hint">klik op een blok voor meer uitleg</div>
+
+  <div class="titlecard" data-key="situering">
+    <h1>GO! Atheneum Anderlecht</h1>
+    <p><em>Education beyond Borders</em> · Studiedag, door Michel Lanssens · UHasselt, maart 2026</p>
+    <div class="tc-cta">klik voor situering en opzet</div>
+  </div>
+
+  <div class="section-label">Jullie visie<span class="sub">als vertrekpunt - in jullie eigen woorden</span></div>
+  <div class="grid g1">
+    <div class="block missie" data-key="visie">
+      <div class="bt">Missie en visie</div>
+      <div class="bq">“Jongeren met een interesse voor kunst en wetenschap maximale leerkansen bieden en inzetten op hun totale persoonlijkheidsontwikkeling en individueel welbevinden.”</div>
+    </div>
+  </div>
+
+  <div class="section-label">De dag<span class="sub">waaraan Karel en ik mochten deelnemen</span></div>
+  <div class="grid g3">
+    <div class="block scene" data-key="dag-ontvangst"><div class="bt">De ontvangst</div><div class="bs">Niet als bezoeker, maar als deelnemer</div></div>
+    <div class="block scene" data-key="dag-voormiddag"><div class="bt">De voormiddag</div><div class="bs">Verbondenheid aan het werk: school, sfeer, pedagogie</div></div>
+    <div class="block scene" data-key="dag-namiddag"><div class="bt">De namiddag</div><div class="bs">De vakgroep Nederlands: didactiek over de jaren heen</div></div>
+  </div>
+
+  <div class="section-label">Wat ik sterk vond<span class="sub">waar jullie visie de praktijk haalt</span></div>
+  <div class="grid g3">
+    <div class="block sch" data-key="sterk-verbondenheid"><div class="bt">Verbondenheid als troef</div><div class="bs">Een leerkracht staat er hier niet alleen voor</div></div>
+    <div class="block lkr" data-key="sterk-methodes"><div class="bt">Samen zoeken naar de beste methodes</div><div class="bs">Didactiek als gedeelde zoektocht, de lat hoog</div></div>
+    <div class="block lln" data-key="sterk-leerlingen"><div class="bt">Leerlingen met een eigen stem</div><div class="bs">Niet kneden, maar verbinden</div></div>
+  </div>
+
+  <div class="capstone" data-key="noot">
+    “Een open en positieve school, een school in interactie.”
+    <div class="cap-cta">klik voor een persoonlijke noot</div>
+  </div>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-inner">
+    <button class="drawer-close" id="closeBtn" aria-label="Sluiten">×</button>
+    <div class="cat" id="dCat"></div>
+    <h2 id="dTitle"></h2>
+    <div id="dBody"></div>
+  </div>
+</aside>
+
+<script>
+const GAP = t => `<div class="gap">${t}</div>`;
+const content = {
+  "situering": { cat:"Situering", title:"Education beyond Borders", body:`
+    <p>Education beyond Borders is een opdracht binnen de Educatieve Masteropleiding aan UHasselt, gecoördineerd door de heer Lieven Faes. We waren met twee studenten: mijn medestudent Karel Quanten en ikzelf. Samen trokken we naar Brussel voor een driedaagse onderdompeling in het Nederlandstalige grootstedelijke onderwijs.</p>
+    <p>Het vertrekpunt was een workshop van Katelijne Van Lommel met grootstedelijke scholen in Antwerpen en Brussel. Van daaruit legden Lieven, Karel en ik contacten met scholen, en zo konden we concrete afspraken maken met directies, begeleiders en leraren.</p>
+    <p>De onderdompeling liep over drie dagen: een studiedag met Katelijne Van Lommel, een volledige schooldag in het Atheneum Caroline Pauwels in Molenbeek, en een studiedag hier in het GO! Atheneum Anderlecht, met directie, leerkrachten, opvoeders en CLB. Geen leerlingen in de klas die dag, maar wel een team dat samen nadenkt over de eigen schoolwerking - en twee studenten die de hele dag mochten meedraaien. Deze pagina bundelt wat ik meenam uit die derde dag.</p>` },
+
+  "visie": { cat:"Jullie visie", title:"Missie en visie", body:`
+    <div class="visie"><strong>Missie.</strong> Het GO! Atheneum Anderlecht wil jongeren met een interesse voor kunst en wetenschap maximale leerkansen bieden en inzetten op hun totale persoonlijkheidsontwikkeling en individueel welbevinden.</div>
+    <div class="visie"><strong>Visie.</strong> Leerlingen die hun interesses en talenten ontdekken in een warme en veilige omgeving en openbloeien tot brede, sterke en zelfstandige persoonlijkheden.</div>
+    <p>Die teksten kennen jullie beter dan ik - daarvoor hebben jullie mij niet nodig. Wat volgt is iets anders: wat Karel en ik op een studiedag gezien, meegemaakt en beleefd hebben. Een getuigenis, als bewijs dat die visie doorsijpelt tot in de praktijk.</p>` },
+
+  "dag-ontvangst": { cat:"De dag", title:"De ontvangst", body:`
+    <p>De directeur, de opvoeders en de leerkrachten waren buitengewoon open en warm voor Karel en mij. Al bij de toespraak van directeur David Dedecker viel het op: hij spreekt niet over zijn team, maar vanuit en namens het team.</p>
+    <p>Van de eerste minuut hoorden we erbij. We ontbeten en lunchten samen met het hele personeel, en niemand behandelde ons als toeschouwers. Je kan bezoekers een stoel achteraan geven, of je kan ze mee aan tafel zetten. Hier was het het tweede. Zo voelt het om niet als bezoeker, maar als deelnemer ontvangen te worden.</p>` },
+
+  "dag-voormiddag": { cat:"De dag", title:"De voormiddag", body:`
+    <p>In de voormiddag werden we gewoon tussen de leerkrachten gemixt: groepssessies, rollenspelen, discussiegroepjes - met directie, opvoeders en CLB erbij. We mochten aan het woord komen, onze mening geven, en werden aangemoedigd om onze inbreng te doen.</p>
+    <p>Wat ik daar zag, was verbondenheid aan het werk: leerkrachten, directie, CLB en opvoeders zoals Claudio die samen nadenken, over de grenzen van hun functie heen. De reële uitdagingen kwamen open op tafel - niet om te klagen, maar om er samen iets mee te doen.</p>
+    <p>En daaronder een gedeelde pedagogische visie: respect voor de zelfstandigheid van de leerlingen, als personen met een eigen stem op weg naar volwassenheid. Helemaal in lijn met wat Katelijne Van Lommel ‘aandacht voor signaalgedrag’ noemt.</p>` },
+
+  "dag-namiddag": { cat:"De dag", title:"De namiddag: de vakgroep Nederlands", body:`
+    <p>In de namiddag zaten Karel en ik in een klein subgroepje: de vakgroep leerkrachten Nederlands. Hier ging het over didactiek, en over samenwerking over de studiejaren heen.</p>
+    <p>Op tafel: een Excel waarin de leerplandoelen van het GO! vertaald worden naar zinnen die een leerling zelf kan lezen en begrijpen. Een instrument om leerlingen, van wie de thuistaal vaak niet het Nederlands is, de onregelmatige werkwoorden te leren vervoegen en te blijven oefenen, jaar na jaar. En het schriftje dat leerlingen over de jaren heen aanvullen met Nederlandse woorden die ze nog niet goed kennen - een eenvoudig idee dat met de leerling meegroeit.</p>
+    <p>De sfeer was open en gemoedelijk, en tegelijk ongelooflijk stimulerend. Een vraag droeg alles: hoe kunnen we beter lesgeven? Leerkrachten die elkaar tips geven, elkaar omhoogtillen, en samen bouwen aan gemeenschappelijke leerlijnen. Indrukwekkend.</p>` },
+
+  "sterk-verbondenheid": { cat:"Wat ik sterk vond", title:"Verbondenheid als troef", body:`
+    <p>Wat ik in Anderlecht het sterkst voelde: de verbondenheid tussen de leerkrachten onderling, en met de directie, het CLB en opvoeders zoals Claudio. Dat is geen sfeer-element. Het is een troef die de leerkracht in zijn of haar kracht zet. En ze reikt tot buiten de schoolmuren: de bankjes rond de school staan er in overleg met de buurt.</p>
+    <p>Een leerkracht die er alleen voor staat, draagt alles zelf. Een leerkracht die gedragen wordt door een team, kan veel meer aan - en durft meer. De vakgroep was daar het mooiste voorbeeld van: expertise die niet in een klaslokaal blijft hangen, maar door het team stroomt. Dat bouw je niet met een goede vergadering. Het is werk van jaren, en net daarom zo overtuigend als je het ziet.</p>` },
+
+  "sterk-methodes": { cat:"Wat ik sterk vond", title:"Samen zoeken naar de beste methodes", body:`
+    <p>De constructieve sfeer in de vakgroep: niet ‘zo doen we het nu eenmaal’, maar ‘hoe kunnen we het beter doen?’ Leerlijnen over de jaren heen, tools die met de leerling meegroeien, tips die vrij over tafel gaan.</p>
+    <p>Opvallend was ook de ambitie erachter. Taal wordt hier niet benoemd als een probleem dat opgelost moet worden, maar als een lat die hoog ligt - en taalontwikkelend lesgeven als een verantwoordelijkheid van het hele team. Hoge verwachtingen als uitdrukking van zorg: men gelooft in wat deze leerlingen kunnen. Dat neem ik mee.</p>` },
+
+  "sterk-leerlingen": { cat:"Wat ik sterk vond", title:"Leerlingen met een eigen stem", body:`
+    <p>De manier waarop de directeur en de opvoeders over leerlingen spreken: als personen met een eigen stem en een eigen zelfstandigheid, op weg naar volwassenheid, en als dusdanig gerespecteerd. Moeilijk gedrag wordt gelezen als signaal, niet als stoornis. Daarachter zit nieuwe autoriteit: gezag als aanwezigheid en verbinding, niet als dwang. Niet kneden, maar verbinden.</p>
+    <p>Daar hoort een helder onderscheid bij dat het team zelf maakt: oprecht respect voor de cultuur van elke leerling is iets anders dan respect vragen voor de afgesproken regels. Beide tegelijk, zonder ze te verwarren. Dat neem ik mee als kern van mijn eigen houding in de klas.</p>` },
+
+  "noot": { cat:"Tot slot", title:"Een persoonlijke noot", body:`
+    <p>Katelijne Van Lommel zei het op onze eerste dag al: Brusselse scholen staan misschien een stap voor, omdat ze weten dat er iets fundamenteel moet veranderen. In Anderlecht zag ik dat aan het werk - niet als theorie, maar aan een tafel vol leerkrachten die het gewoon doen.</p>
+    <p>Wat ik hier het sterkst heb gevoeld, is dat verbondenheid - tussen leerkrachten onderling, met de directie, en met professionals zoals de opvoeders - geen bijzaak is, maar de troef die een leerkracht in zijn of haar kracht zet. Niemand hoeft er alleen voor te staan.</p>
+    <p><span class="vow">Zelf zou ik hier graag deel uitmaken van zo'n team - en er lesgeven, gedragen door collega's die elkaar omhoogtillen.</span></p>` },
+};
+
+const drawer = document.getElementById('drawer'), backdrop = document.getElementById('backdrop');
+let activeEl = null;
+function open(key, el) {
+  const d = content[key]; if (!d) return;
+  document.getElementById('dCat').textContent = d.cat;
+  document.getElementById('dTitle').textContent = d.title;
+  document.getElementById('dBody').innerHTML = d.body;
+  if (activeEl) activeEl.classList.remove('active');
+  el.classList.add('active'); activeEl = el;
+  drawer.classList.add('open'); backdrop.classList.add('open');
+}
+function close() {
+  drawer.classList.remove('open'); backdrop.classList.remove('open');
+  if (activeEl) { activeEl.classList.remove('active'); activeEl = null; }
+}
+document.querySelectorAll('.block, .titlecard, .capstone').forEach(b => b.addEventListener('click', () => open(b.dataset.key, b)));
+document.getElementById('closeBtn').addEventListener('click', close);
+backdrop.addEventListener('click', close);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+</script>
+</body>
+</html>
